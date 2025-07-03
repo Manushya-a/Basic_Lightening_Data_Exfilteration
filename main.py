@@ -4,6 +4,9 @@ import json
 
 count = int(input("Enter the number of lightning strikes to track: "))
 
+def decoder(string):
+    print('bleah')
+
 async def fetch_data(count):
     headers = {
         "Pragma": "no-cache",
@@ -17,7 +20,7 @@ async def fetch_data(count):
             "wss://ws2.blitzortung.org/",
             additional_headers=headers
         ) as ws:
-            await ws.send('{"'+'a'+'":'+111+'}')
+            await ws.send('{"'+'a'+'":'+'111'+'}')
             print("Connected and subscribed to lightning channel")
             
             for _ in range(count):
