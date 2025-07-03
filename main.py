@@ -15,14 +15,15 @@ async def fetch_data(count):
     try:
         async with websockets.connect(
             "wss://ws2.blitzortung.org/",
-            extra_headers=headers
+            additional_headers=headers
         ) as ws:
-            await ws.send('{"action": "subscribe", "channel": "lightning"}')
+            await ws.send('{"'+'a'+'":'+111+'}')
             print("Connected and subscribed to lightning channel")
             
             for _ in range(count):
                 try:
                     data = await ws.recv()
+                    print(data)
                     try:
                         # Try to parse JSON data
                         json_data = json.loads(data)
