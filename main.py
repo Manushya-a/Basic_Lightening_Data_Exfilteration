@@ -32,11 +32,11 @@ async def fetch_data(count):
 #        "Pragma": "no-cache",
 #        "Cache-Control": "no-cache",
 #        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36",
-#        "Origin": "https://map.blitzortung.org"
+#        "Origin": "https://website.url"
 #    }
     
     try:
-        async with websockets.connect("wss://ws2.blitzortung.org/") as ws:
+        async with websockets.connect("wss://websocket.link/") as ws:
             await ws.send('{"'+'a'+'":'+'111'+'}')
             print("Connected and subscribed to lightning channel")
             
