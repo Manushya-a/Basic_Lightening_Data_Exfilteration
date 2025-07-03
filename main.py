@@ -6,6 +6,7 @@ class bcolors:
     OKGREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
+    ENDC = '\033[0m'
 
 count = int(input("Enter the number of lightning strikes to track: "))
 
