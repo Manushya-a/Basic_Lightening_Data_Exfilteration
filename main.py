@@ -4,8 +4,31 @@ import json
 
 count = int(input("Enter the number of lightning strikes to track: "))
 
-def decoder(string):
-    print('bleah')
+def decode(b):
+    d = list(b)
+    c = d[0]
+    f = c
+    g = [c]
+    h = 256
+    o = h
+    e = {}
+
+    for b in range(1, len(d)):
+        char = d[b]
+        a = ord(char) if len(char) == 1 else char
+        if h > a:
+            a = char
+        elif str(a) in e:
+            a = e[a]
+        else:
+            a = f + c
+        g.append(a)
+        c = a[0]
+        e[o] = f + c
+        o += 1
+        f = a
+
+    return ''.join(g)
 
 async def fetch_data(count):
     headers = {
