@@ -2,6 +2,11 @@ import asyncio
 import websockets
 import json
 
+class bcolors:
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+
 count = int(input("Enter the number of lightning strikes to track: "))
 
 def decode(b):
@@ -23,18 +28,15 @@ def decode(b):
     return ''.join(g)
 
 async def fetch_data(count):
-    headers = {
-        "Pragma": "no-cache",
-        "Cache-Control": "no-cache",
-        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36",
-        "Origin": "https://map.blitzortung.org"
-    }
+#    headers = {  I initially thought this was necessary to get the request through but i guess not
+#        "Pragma": "no-cache",
+#        "Cache-Control": "no-cache",
+#        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36",
+#        "Origin": "https://map.blitzortung.org"
+#    }
     
     try:
-        async with websockets.connect(
-            "wss://ws2.blitzortung.org/",
-            additional_headers=headers
-        ) as ws:
+        async with websockets.connect("wss://ws2.blitzortung.org/") as ws:
             await ws.send('{"'+'a'+'":'+'111'+'}')
             print("Connected and subscribed to lightning channel")
             
@@ -44,15 +46,14 @@ async def fetch_data(count):
                     try:
                         # Try to parse JSON data
                         json_data = json.loads(decode(data))
-                        print("Received lightning data:")
-
+                        print(bcolors.OKGREEN + "Received lightning data:" + bcolors.ENDC)
                         print(json_data)
                     except json.JSONDecodeError:
-                        print("Received non-JSON data:")
-                        
+                        print(bcolors.WARNING + "Received non-JSON data:" + bcolors.ENDC)
                         print(decode(data))
                 except websockets.exceptions.ConnectionClosed:
                     print("Connection closed by server")
+                    print(bcolors.FAIL + "Connection closed by server" + bcolors.ENDC)
                     break
                     
     except Exception as e:
