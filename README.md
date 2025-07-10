@@ -68,8 +68,9 @@ python3 lightning_collector.py [mode] [number]
 ## Configuration
 
 For Google Sheet mode, you need to:
-1. Replace `"Link-to-your-google-spreadsheet"` in the code with your actual Google Sheet ID
+1. Replace `"Link-to-your-google-spreadsheet"` in the code with your actual Google Sheet ID (Line no. 132)
 2. Ensure your `credentials.json` file is in the project directory
+3. Ensure you input the target's websocket url (Line no. 184)
 
 ## Output Format
 
