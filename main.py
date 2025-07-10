@@ -25,6 +25,44 @@ class bcolors:
     MAGENTA = '\033[95m'
     UNDERLINE = '\033[4m'
 
+def flatten(data):
+    """
+    Converts the List of JSON objects into list of lists that contain the lightening data
+    >>> input: List of JSON objects
+    >>> output: List of lists 
+    """
+    ans = []
+
+    for response in data:
+        date, resp_time = time_formater(response["time"]).split()
+        for individual in response["sig"]:
+            temp = []
+            temp.append(individual["lat"])
+            temp.append(individual["lon"])
+            temp.append(date)
+            temp.append(resp_time + time_formater(individual["time"])) # This doesnt work for now... but ok
+            temp.append(individual["sta"])
+            temp.append(individual["alt"])
+            temp.append(response["mds"])
+            temp.append(response["mcg"])
+            temp.append(response["region"])
+            temp.append(response["delay"])
+
+            ans.append(temp)
+
+    return ans
+
+def time_formater(time):
+    """
+    Converts the Unix timestamp into time in form of DD-MM-YYYY HH-MM-SS
+    >>> input: String of unix time
+    >>> output: String of time value 
+    """
+    ts_seconds = time / 1e9  # Convert to seconds
+    dt = datetime.fromtimestamp(ts_seconds)
+
+    return str(dt)
+
 count = int(input("Enter the number of lightning strikes to track: "))
 
 def decode(b):
