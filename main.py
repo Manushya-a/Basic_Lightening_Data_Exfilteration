@@ -28,6 +28,11 @@ class bcolors:
 count = int(input("Enter the number of lightning strikes to track: "))
 
 def decode(b):
+    """
+    Function reverse engineered from the website that take
+    >>> input: Encoded string of data
+    >>> output: Decoded string
+    """
     e = {}
     d = list(b)
     c = d[0]
