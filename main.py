@@ -12,6 +12,7 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 from googleapiclient.errors import HttpError
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -109,6 +110,40 @@ def excel_mode(data):
     print(bcolors.OKBLUE + "Output file is stored as : " + bcolors.ENDC + bcolors.BOLD + input_to_file(data) + bcolors.ENDC)
 
 count = int(input("Enter the number of lightning strikes to track: "))
+
+def gsheet_mode(data):
+    """
+    Connects to the Google cloud using API call and stores the data on the spreadsheet
+    >>> input: List of JSON objects to be stored in a Google spreadsheet
+    >>> output: NA
+    """
+
+    flattened_data = flatten(data)
+
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKCYAN + "Entering: GOOGLE SHEET MODE" + bcolors.ENDC)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    try:
+        creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+        client = gspread.authorize(creds)
+    except Exception as e:
+        print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.RED + " An error occured while verifying credentials." + bcolors.ENDC)
+        print(bcolors.RED + "Error : " + bcolors.ENDC + str(e))
+        sys.exit(1)
+
+    sheets_id = "Link-to-your-google-spreadsheet" 
+    workbook = client.open_by_key(sheets_id)
+    sheet = workbook.sheet1
+
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKGREEN + " Connection established!" + bcolors.ENDC)
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKGREEN + " Outputing to Google Sheet with the id: "+ bcolors.ENDC + bcolors.BOLD + sheets_id + bcolors.ENDC)
+
+    for i in range(len(flattened_data)):
+        for j in range(len(flattened_data[i])):
+            sheet.update_cell(i + 2, j + 1, flattened_data[i][j])
+            time.sleep(0.75)
+
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKGREEN + " Output complete" +  bcolors.ENDC)
 
 def decode(b):
     """
