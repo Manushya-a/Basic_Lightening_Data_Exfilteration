@@ -1,6 +1,16 @@
+import argparse
 import asyncio
 import websockets
 import json
+import sys
+import time
+import gspread
+
+from datetime import datetime
+from openpyxl import Workbook
+from googleapiclient.discovery import build
+from google.oauth2.service_account import Credentials
+from googleapiclient.errors import HttpError
 
 class bcolors:
     HEADER = '\033[95m'
