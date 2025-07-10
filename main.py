@@ -46,34 +46,43 @@ def decode(b):
     return ''.join(g)
 
 async def fetch_data(count):
+    """
+    Fetches data from the target asynchronously
+    
+    >>>> returns: A list with json objects inside  
+    """
 #    headers = {  I initially thought this was necessary to get the request through but i guess not
 #        "Pragma": "no-cache",
 #        "Cache-Control": "no-cache",
 #        "User-Agent": "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36",
 #        "Origin": "https://website.url"
 #    }
-    
+
     try:
+        main_data = []
         async with websockets.connect("wss://websocket.link/") as ws:
             await ws.send('{"'+'a'+'":'+'111'+'}')
-            print("Connected and subscribed to lightning channel")
+            print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.ENDC + bcolors.BOLD +" Connected and subscribed to lightening channel" + bcolors.ENDC)
             
             for _ in range(count):
                 try:
                     data = await ws.recv()
                     try:
+                        
                         # Try to parse JSON data
-                        json_data = json.loads(decode(data))
-                        print(bcolors.OKGREEN + "Received lightning data:" + bcolors.ENDC)
-                        print(json_data)
+                        print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKGREEN + " Received lightening data" + bcolors.ENDC)
+
+                        main_data.append(json.loads(decode(data).replace("'", '"')))
+
                     except json.JSONDecodeError:
-                        print(bcolors.WARNING + "Received non-JSON data:" + bcolors.ENDC)
+                        print(bcolors.RED + "Received non-JSON data:" + bcolors.ENDC)
                         print(decode(data))
                 except websockets.exceptions.ConnectionClosed:
                     print("Connection closed by server")
-                    print(bcolors.FAIL + "Connection closed by server" + bcolors.ENDC)
+                    print(bcolors.RED + "Connection closed by server" + bcolors.ENDC)
                     break
-                    
+        return main_data
+
     except Exception as e:
         print(f"An error occurred: {e}")
 
