@@ -1,6 +1,3 @@
-Here's the updated `GSheet.md` file with the additional instructions for setting up a virtual environment and obtaining the sheet ID:
-
-```markdown
 # Google Sheets API Setup Guide
 
 Follow these steps to enable and configure the Google Sheets API for use with the Lightning Data Collector project.
@@ -126,4 +123,3 @@ If you encounter issues:
 - Verify your Google Sheet ID is correct
 - Make sure your virtual environment is activated when running the script
 - Check all required packages are installed in the virtual environment
-```
