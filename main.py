@@ -86,4 +86,31 @@ async def fetch_data(count):
     except Exception as e:
         print(f"An error occurred: {e}")
 
-asyncio.run(fetch_data(count))
+async def main():
+    """
+    Start point of the code
+    """
+    parser = argparse.ArgumentParser(description="Output the required data in differnt modes")
+    
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("-log", action="store_true", help="Run in log mode")
+    group.add_argument("-excel", action="store_true", help="Run in Excel mode")
+    group.add_argument("-gsheet", action="store_true", help="Run in Google sheet mode")
+    
+    parser.add_argument("number", type=int, help="Number of responses you want to intercept")
+    
+    args = parser.parse_args()
+
+    data = await fetch_data(args.number)
+    
+    if args.log:
+        log_mode(data)
+    elif args.excel:
+        excel_mode(data)
+    elif args.gsheet:
+        gsheet_mode(data)
+
+if __name__ == "__main__":
+    print(bcolors.HEADER + ">>>> Initialising....." + bcolors.ENDC)
+    asyncio.run(main())
+    print(bcolors.HEADER + ">>>> Concluding Execution" + bcolors.ENDC)
