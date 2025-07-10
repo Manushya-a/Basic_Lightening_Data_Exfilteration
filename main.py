@@ -63,6 +63,17 @@ def time_formater(time):
 
     return str(dt)
 
+def log_mode(data):
+    """
+    Prints the data into the shell
+    >>> input: List of JSON objects to be stored
+    >>> output: NA
+    """
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKCYAN + " Entering: LOG MODE" + bcolors.ENDC)
+    print(bcolors.OKBLUE + "Requested Lightening data: " + bcolors.ENDC)
+    time.sleep(2)
+    print(data)
+
 count = int(input("Enter the number of lightning strikes to track: "))
 
 def decode(b):
