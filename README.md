@@ -28,7 +28,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
 
 2. Install the required packages:
    ```bash
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 3. For Google Sheet mode:
@@ -37,7 +37,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
 ## Usage
 
 ```bash
-python lightning_collector.py [mode] [number]
+python3 lightning_collector.py [mode] [number]
 ```
 
 ### Modes:
@@ -52,17 +52,17 @@ python lightning_collector.py [mode] [number]
 
 1. Display 10 lightning strikes in console:
    ```bash
-   python lightning_collector.py -log 10
+   python3 lightning_collector.py -log 10
    ```
 
 2. Save 5 lightning strikes to Excel:
    ```bash
-   python lightning_collector.py -excel 5
+   python3 lightning_collector.py -excel 5
    ```
 
 3. Upload 20 lightning strikes to Google Sheet:
    ```bash
-   python lightning_collector.py -gsheet 20
+   python3 lightning_collector.py -gsheet 20
    ```
 
 ## Configuration
@@ -106,8 +106,7 @@ The main components of the code are:
 
 ## Dependencies
 
-Listed in `requirements.txt`:
-
+Listed in `requirements.txt`
 
 ## Contributing
 
