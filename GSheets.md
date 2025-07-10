@@ -1,3 +1,6 @@
+Here's the updated `GSheet.md` file with the additional instructions for setting up a virtual environment and obtaining the sheet ID:
+
+```markdown
 # Google Sheets API Setup Guide
 
 Follow these steps to enable and configure the Google Sheets API for use with the Lightning Data Collector project.
@@ -68,13 +71,42 @@ This will download a JSON key file to your computer.
 4. Set permission to **"Editor"**
 5. Click **"Send"**
 
-## Step 8: Configure Script
+## Step 8: Set Up Virtual Environment
 
-1. Open your project code
-2. Locate the line with `sheets_id = "Link-to-your-google-spreadsheet"`
-3. Replace it with your Google Sheet ID (found in the sheet's URL)
-   - Example: `https://docs.google.com/spreadsheets/d/ABC123xyz/edit#gid=0`
-   - The ID is `ABC123xyz`
+1. Open terminal/command prompt in your project directory
+2. Create a virtual environment:
+   ```bash
+   python3 -m venv sheets
+   ```
+3. Activate the environment:
+   - On macOS/Linux:
+     ```bash
+     source sheets/bin/activate
+     ```
+   - On Windows:
+     ```bash
+     sheets\Scripts\activate
+     ```
+4. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Step 9: Configure Script with Sheet ID
+
+1. Open your Google Sheet in browser
+2. Get the Sheet ID from the URL:
+   - The URL looks like: `https://docs.google.com/spreadsheets/d/ABC123xyz/edit#gid=0`
+   - The ID is the part between `/d/` and `/edit`: `ABC123xyz`
+3. Open your project code (`lightning_collector.py`)
+4. Locate the line with:
+   ```python
+   sheets_id = "Link-to-your-google-spreadsheet"
+   ```
+5. Replace it with your actual Sheet ID:
+   ```python
+   sheets_id = "ABC123xyz"  # Your actual sheet ID here
+   ```
 
 ## Verification
 
@@ -82,3 +114,16 @@ To verify everything is working:
 1. Run the script in Google Sheet mode:
    ```bash
    python lightning_collector.py -gsheet 5
+   ```
+2. Check your Google Sheet - data should appear within seconds
+
+## Troubleshooting
+
+If you encounter issues:
+- Verify the service account email has editor access to the sheet
+- Check the `credentials.json` file is in the correct location
+- Ensure you've enabled the Google Sheets API
+- Verify your Google Sheet ID is correct
+- Make sure your virtual environment is activated when running the script
+- Check all required packages are installed in the virtual environment
+```

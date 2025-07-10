@@ -32,10 +32,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
    ```
 
 3. For Google Sheet mode:
-   - Create a Google Cloud Project and enable the Google Sheets API
-   - Download your service account credentials JSON file and save it as `credentials.json` in the project directory
-   - Share your Google Sheet with the service account email
-   - For an elaborate explaination of steps head on to GSheet.md, which will provide a comprehensive stepwise guide.
+    - For an elaborate explaination of steps head on to GSheet.md, which will provide a comprehensive stepwise guide.
 
 ## Usage
 
