@@ -25,6 +25,31 @@ class bcolors:
     MAGENTA = '\033[95m'
     UNDERLINE = '\033[4m'
 
+def input_to_file(data):
+    """
+    Creates a .xlsx file and input the value into it
+    >>> input: List of lists of data
+    >>> output: returns the timestamp of the moment the file was stored
+    """
+    flattened_data = flatten(data)
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Lightening data"
+
+    # Add headers if needed
+    headers = ["lat", "lon", "date", "time", "sta",	"alt", "mds", "mcg", "region", "delay"]
+    ws.append(headers)
+
+    # Add all data at once
+    for row in flattened_data:
+        ws.append(row)
+
+    # Save the workbook
+    time_stamp = str(datetime.now()) + ".xlsx"
+    wb.save(time_stamp)
+
+    return time_stamp
+
 def flatten(data):
     """
     Converts the List of JSON objects into list of lists that contain the lightening data
@@ -73,6 +98,15 @@ def log_mode(data):
     print(bcolors.OKBLUE + "Requested Lightening data: " + bcolors.ENDC)
     time.sleep(2)
     print(data)
+
+def excel_mode(data):
+    """
+    Stores the data into a .xlsx file
+    >>> input: List of JSON objects to be stored
+    >>> output: NA
+    """
+    print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKCYAN + " Entering: EXCEL MODE" + bcolors.ENDC)
+    print(bcolors.OKBLUE + "Output file is stored as : " + bcolors.ENDC + bcolors.BOLD + input_to_file(data) + bcolors.ENDC)
 
 count = int(input("Enter the number of lightning strikes to track: "))
 
