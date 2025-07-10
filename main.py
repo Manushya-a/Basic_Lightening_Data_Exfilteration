@@ -109,8 +109,6 @@ def excel_mode(data):
     print(bcolors.ORANGE + "[" + str(datetime.now()) + "]" + bcolors.OKCYAN + " Entering: EXCEL MODE" + bcolors.ENDC)
     print(bcolors.OKBLUE + "Output file is stored as : " + bcolors.ENDC + bcolors.BOLD + input_to_file(data) + bcolors.ENDC)
 
-count = int(input("Enter the number of lightning strikes to track: "))
-
 def gsheet_mode(data):
     """
     Connects to the Google cloud using API call and stores the data on the spreadsheet
@@ -147,7 +145,7 @@ def gsheet_mode(data):
 
 def decode(b):
     """
-    Function reverse engineered from the website that take
+    Function reverse engineered from the website that takes
     >>> input: Encoded string of data
     >>> output: Decoded string
     """
