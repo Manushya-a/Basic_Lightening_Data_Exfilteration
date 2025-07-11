@@ -22,7 +22,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/lightning-data-collector.git
+   git clone https://github.com/Manushya-a/Lightening_Data_Exfilteration.git
    cd lightning-data-collector
    ```
 
@@ -37,7 +37,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
 ## Usage
 
 ```bash
-python3 lightning_collector.py [mode] [number]
+python3 main.py [mode] [number]
 ```
 
 ### Modes:
@@ -52,17 +52,17 @@ python3 lightning_collector.py [mode] [number]
 
 1. Display 10 lightning strikes in console:
    ```bash
-   python3 lightning_collector.py -log 10
+   python3 main.py -log 10
    ```
 
 2. Save 5 lightning strikes to Excel:
    ```bash
-   python3 lightning_collector.py -excel 5
+   python3 main.py -excel 5
    ```
 
 3. Upload 20 lightning strikes to Google Sheet:
    ```bash
-   python3 lightning_collector.py -gsheet 20
+   python3 main.py -gsheet 20
    ```
 
 ## Configuration

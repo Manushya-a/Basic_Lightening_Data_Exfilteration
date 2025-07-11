@@ -95,7 +95,7 @@ This will download a JSON key file to your computer.
 2. Get the Sheet ID from the URL:
    - The URL looks like: `https://docs.google.com/spreadsheets/d/ABC123xyz/edit#gid=0`
    - The ID is the part between `/d/` and `/edit`: `ABC123xyz`
-3. Open your project code (`lightning_collector.py`)
+3. Open your project code (`main.py`)
 4. Locate the line with:
    ```python
    sheets_id = "Link-to-your-google-spreadsheet"
@@ -110,7 +110,7 @@ This will download a JSON key file to your computer.
 To verify everything is working:
 1. Run the script in Google Sheet mode:
    ```bash
-   python lightning_collector.py -gsheet 5
+   python main.py -gsheet 5
    ```
 2. Check your Google Sheet - data should appear within seconds
 
