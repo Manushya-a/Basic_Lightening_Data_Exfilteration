@@ -23,7 +23,7 @@ A Python script that connects to a WebSocket server to collect lightning strike 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Manushya-a/Lightening_Data_Exfilteration.git
-   cd lightning-data-collector
+   cd Lightning_Data_Exfilteration
    ```
 
 2. Install the required packages:
